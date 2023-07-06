@@ -1,0 +1,120 @@
+<!Doctype html>
+
+<html lang="PT-BR">
+<head>
+<meta charset="UTF-8" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
+<title>Produtos</title>
+</head>
+
+<body style="background-color: #4682B4 ">
+
+<header >
+		<nav class="navbar navbar-expand-lg"  style="background-color: #000 ">
+			<div class="container-fluid"  >
+				<a class="navbar-brand" href="/">
+					
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD8ArNmFppOUYrTSftvTzxaQCRNXJTYK_Z8A&usqp=CAU" width="70px">
+				</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon" ></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active" style ="color:#fff" href="/estoque">Estoque de Produtos</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" style ="color:#fff" href="/tabelaDeProdutos">Produtos detalhados</a>
+						
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+	</header>
+
+
+	<h1 >Estoque</h1>
+
+	<div class="container">
+		<div class="card" th:each="estoqueModel : ${estoqueModel}"
+			style="margin-top: 15px; height: 60%;">
+			<div class="card-header" th:text="${estoqueModel.id}"></div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-md-8 mb-5">		
+						<div>
+							Produto: <span th:text=" ${estoqueModel.nomeProduto}"></span>
+						</div>
+						<div>
+							Quantidade: <span th:text=" ${estoqueModel.quantidade}"></span>
+						</div>
+						<div>
+							Preço: <span th:text=" ${estoqueModel.preco}"></span>
+						</div>
+						<div>
+							Entrada: <span th:text=" ${estoqueModel.datEntrada}"></span>
+						</div>
+						<div>
+							Saída: <span th:text=" ${estoqueModel.datSaida}"></span>
+						</div>
+						<div>
+							Fornecedor: <span th:text=" ${estoqueModel.nomeFornecedor}"></span>
+						</div>
+						<div>
+							Descrição: <span th:text=" ${estoqueModel.desconto}"></span>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<img th:src="${estoqueModel.urlImgm}" class="img-thumbnail" src="" style="width: 200px" />
+					</div>
+				</div>
+						<div class="row" >
+							<div class="row">
+								<a th:href="@{editar/{id} (id=${estoqueModel.id})}" href="estoqueModel"
+								class="btn btn-primary">Editar</a>
+								<a data-bs-toggle 	th:href="@{delete/{id} (id=${estoqueModel.id})}" href="estoqueModel"
+								 class="btn btn-danger">Deletar</a>
+
+				</div>
+			</div> 
+			</div>
+			<div class="modal" tabindex="-1" th:attr="id='modalExcluir' +${estoqueModel.id}">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Excluir produto?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Deseja realmente excluir o produto:<strong><span th:text="${estoqueModel.nomeProduto}"> </span></strong> ?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<a th:href="@{/delete/{id}(id=${estoqueModel.id})}" href="#" typr="button" class="btn btn-warning">Confirmar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+			
+			
+	</div>
+	
+		<footer style="text-align: center; padding: 10px 0px; background-color: #4682B4; margin-bottom: 5px">
+			<span>Todos os direitos reservados &reg Eduardo Santana, Carlos Daniel Ribeiro. </span>
+	</footer>
+</body>
+
+</html>

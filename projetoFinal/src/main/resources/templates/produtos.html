@@ -1,0 +1,99 @@
+<!Doctype html>
+
+<html lang="PT-BR">
+<head>
+<meta charset="UTF-8" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
+<title>Produtos</title>
+</head>
+
+<body>
+
+<header>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/">
+					<img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" width="38px">
+
+				</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active" href="/estoque">Estoque de Produtos</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="/tabelaDeProdutos">Produtos detalhados</a>
+						
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+	</header>
+
+
+	<h1>Estoque</h1>
+
+	<div class="container">
+		<div class="card" th:each="estoqueModel : ${estoqueModel}"
+			style="margin-top: 15px; height: 60%;">
+			<div class="card-header" th:text="${estoqueModel.id}"></div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-md-8 mb-5">		
+						<div>
+							Produto: <span th:text=" ${estoqueModel.nomeProduto}"></span>
+						</div>
+						<div>
+							Quantidade: <span th:text=" ${estoqueModel.quantidade}"></span>
+						</div>
+						<div>
+							Preço: <span th:text=" ${estoqueModel.preco}"></span>
+						</div>
+						<div>
+							Entrada: <span th:text=" ${estoqueModel.datEntrada}"></span>
+						</div>
+						<div>
+							Saída: <span th:text=" ${estoqueModel.datSaida}"></span>
+						</div>
+						<div>
+							Fornecedor: <span th:text=" ${estoqueModel.nomeFornecedor}"></span>
+						</div>
+						<div>
+							Descrição: <span th:text=" ${estoqueModel.desconto}"></span>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<img th:src="${estoqueModel.urlImgm}" class="img-thumbnail" src="" style="width: 200px" />
+					</div>
+				</div>
+			<div class="row">
+				<div class="row">
+					<a th:href="@{ href=/editar/{id} (id=${estoqueModel.id})}" href="#"
+						class="btn btn-primary">Editar</a>
+						<button data-bs-toggle="modal" class="btn btn-danger" th:attr="data-bs-target='#modalExcluir' + ${estoqueModel.id}">Deletar</button>
+				</div>
+			</div> 
+			</div>
+			
+			
+	</div>
+	
+		<footer>
+		<span style="text-align: center; padding: 10px 0px; background-color:  #CCC; margin-bottom: 5px"> Todos os direitos reservados &reg Eduardo Santana, Ribeiro Rct</span>
+		</footer>
+</body>
+
+</html>
